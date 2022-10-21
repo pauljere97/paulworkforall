@@ -1,38 +1,243 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root{
+  --MAX-WIDTH: 640px;
+}
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  position: relative;
+  width: 100%;
   min-height: 100vh;
+  padding: 70px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+
+}
+
+.header{
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  background-color: white;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 0 10px;
+  height: 55px;
+}
+
+.top_bar{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: var(--MAX-WIDTH);
+  padding: 0 12px;
+}
+.top_bar input{
+  flex: 1;
+  margin: 0 10px;
+  padding: 10px;
+  border: none;
+  /* border: 1px solid #f5f5f5; */
+  background-color:  #f9f9f9;
+  border-radius: 0;
+  outline: none;
+}
+.top_bar_icons{
+  cursor: pointer;
+  color: #666;
+}
+
+.top_page_name{
+  flex: 1;
+  margin: 0 10px;
+  padding: 10px;
+}
+
+.list_pad{
+  background-color: white;
+  padding: 5px 0px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  width: 100%;
+  max-width: var(--MAX-WIDTH);
+  border-radius: 10px;
+  overflow: hidden;
+  padding-bottom: 0;
+}
+.list_pad > *:last-child{
+  border-bottom: none;
+}
+.user_card{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  margin: 0 10px;
+  border-bottom: 1px solid #D9D9D9;
+}
+.user_profile_pic{
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.card_main{
+  margin: 0 15px;
+  flex: 1;
+  width: calc(95vw - 100px);
+  max-width: 500px;
+  cursor: pointer;
+  overflow: hidden;
+}
+.card_main_name{
+  font-weight: 500;
+  font-size: 17px;
+  /* padding: 4px 0; */
+  color: #333;
+}
+.card_main_desc{
+  text-overflow: ellipsis; 
+  overflow: hidden; 
+  white-space: nowrap;
+  color: #8D8D8D;
+  font-size: 15px;
+}
+.blank_btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #666;
+}
+
+.view_user{
+  width: 100%;
+  max-width: var(--MAX-WIDTH);
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.view_user img{
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.user_details{
+  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 160px;
+  flex: 1;
+}
+.user_details_cols{
+  display: flex;
+}
+.user_details_cols> div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 25px;
+}
+.user_cols_num{
+  font-size: 25px;
+  font-weight: 600;
+  color: #444;
+}
+.user_cols_desc{
+  font-size: 11px;
+  margin-top: 3px;
+  color: #767676;
+}
+.user_full_name{
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+}
+
+.user_user_name{
+  color: #2E9CDB;
+  font-size: 18px;
+  margin: 2px 0;
+}
+.user_desc_text{
+  font-size: 15px;
+  color: #767676;
+}
+.empty_list{
+  text-align: center;
+  padding: 20px;
+  color: #555;
+}
+
+.pagination{
+  width: 100%;
+  max-width: var(--MAX-WIDTH);
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+}
+
+.pagination button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0 10px;
+  border: none;
   color: white;
+  font-size: 18px;
+  background-color: #028DF7;
 }
 
-.App-link {
-  color: #61dafb;
+
+.loading_screen_off{
+  display: none;
+}
+.loading_screen{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  padding-bottom: 10vw;
+}
+.loader_icon{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  color: var(--RED);
+  animation: loading linear 2s infinite;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+@keyframes loading {
+  from {transform: rotate(0deg)}
+  to {transform: rotate(360deg)}
 }
