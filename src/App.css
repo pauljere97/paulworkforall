@@ -268,7 +268,7 @@
   }
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 460px) {
   .view_user {
     flex-direction: column;
     padding: 10px;
