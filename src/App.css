@@ -31,6 +31,7 @@
   width: 100%;
   padding: 0 10px;
   height: 55px;
+  z-index: 2;
 }
 
 .top_bar {
