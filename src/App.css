@@ -270,7 +270,6 @@
 
 @media only screen and (max-width: 420px) {
   .view_user {
-    border: 1px solid red;
     flex-direction: column;
     padding: 10px;
     position: relative;
