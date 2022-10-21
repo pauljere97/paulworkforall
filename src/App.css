@@ -1,11 +1,13 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-:root{
+
+:root {
   --MAX-WIDTH: 640px;
 }
+
 .App {
   position: relative;
   width: 100%;
@@ -18,7 +20,7 @@
 
 }
 
-.header{
+.header {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,35 +33,37 @@
   height: 55px;
 }
 
-.top_bar{
+.top_bar {
   display: flex;
   align-items: center;
   width: 100%;
   max-width: var(--MAX-WIDTH);
   padding: 0 12px;
 }
-.top_bar input{
+
+.top_bar input {
   flex: 1;
   margin: 0 10px;
   padding: 10px;
   border: none;
   /* border: 1px solid #f5f5f5; */
-  background-color:  #f9f9f9;
+  background-color: #f9f9f9;
   border-radius: 0;
   outline: none;
 }
-.top_bar_icons{
+
+.top_bar_icons {
   cursor: pointer;
   color: #666;
 }
 
-.top_page_name{
+.top_page_name {
   flex: 1;
   margin: 0 10px;
   padding: 10px;
 }
 
-.list_pad{
+.list_pad {
   background-color: white;
   padding: 5px 0px;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
@@ -69,10 +73,12 @@
   overflow: hidden;
   padding-bottom: 0;
 }
-.list_pad > *:last-child{
+
+.list_pad>*:last-child {
   border-bottom: none;
 }
-.user_card{
+
+.user_card {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -80,14 +86,16 @@
   margin: 0 10px;
   border-bottom: 1px solid #D9D9D9;
 }
-.user_profile_pic{
+
+.user_profile_pic {
   width: 50px;
   height: 50px;
   object-fit: cover;
   border-radius: 50%;
   cursor: pointer;
 }
-.card_main{
+
+.card_main {
   margin: 0 15px;
   flex: 1;
   width: calc(95vw - 100px);
@@ -95,20 +103,23 @@
   cursor: pointer;
   overflow: hidden;
 }
-.card_main_name{
+
+.card_main_name {
   font-weight: 500;
   font-size: 17px;
   /* padding: 4px 0; */
   color: #333;
 }
-.card_main_desc{
-  text-overflow: ellipsis; 
-  overflow: hidden; 
+
+.card_main_desc {
+  text-overflow: ellipsis;
+  overflow: hidden;
   white-space: nowrap;
   color: #8D8D8D;
   font-size: 15px;
 }
-.blank_btn{
+
+.blank_btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,7 +130,7 @@
   color: #666;
 }
 
-.view_user{
+.view_user {
   width: 100%;
   max-width: var(--MAX-WIDTH);
   background-color: white;
@@ -130,13 +141,14 @@
   align-items: flex-start;
 }
 
-.view_user img{
+.view_user img {
   width: 160px;
   height: 160px;
   object-fit: cover;
   border-radius: 5px;
 }
-.user_details{
+
+.user_details {
   margin-left: 15px;
   display: flex;
   flex-direction: column;
@@ -145,47 +157,54 @@
   min-height: 160px;
   flex: 1;
 }
-.user_details_cols{
+
+.user_details_cols {
   display: flex;
 }
-.user_details_cols> div{
+
+.user_details_cols>div {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-right: 25px;
 }
-.user_cols_num{
+
+.user_cols_num {
   font-size: 25px;
   font-weight: 600;
   color: #444;
 }
-.user_cols_desc{
+
+.user_cols_desc {
   font-size: 11px;
   margin-top: 3px;
   color: #767676;
 }
-.user_full_name{
+
+.user_full_name {
   font-size: 24px;
   font-weight: 600;
   color: #333;
 }
 
-.user_user_name{
+.user_user_name {
   color: #2E9CDB;
   font-size: 18px;
   margin: 2px 0;
 }
-.user_desc_text{
+
+.user_desc_text {
   font-size: 15px;
   color: #767676;
 }
-.empty_list{
+
+.empty_list {
   text-align: center;
   padding: 20px;
   color: #555;
 }
 
-.pagination{
+.pagination {
   width: 100%;
   max-width: var(--MAX-WIDTH);
   margin-top: 10px;
@@ -195,7 +214,7 @@
   color: #555;
 }
 
-.pagination button{
+.pagination button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -211,10 +230,11 @@
 }
 
 
-.loading_screen_off{
+.loading_screen_off {
   display: none;
 }
-.loading_screen{
+
+.loading_screen {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -227,7 +247,8 @@
   backdrop-filter: blur(10px);
   padding-bottom: 10vw;
 }
-.loader_icon{
+
+.loader_icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -238,6 +259,36 @@
 
 
 @keyframes loading {
-  from {transform: rotate(0deg)}
-  to {transform: rotate(360deg)}
+  from {
+    transform: rotate(0deg)
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .view_user {
+    border: 1px solid red;
+    flex-direction: column;
+    padding: 10px;
+    position: relative;
+  }
+
+  .view_user img {
+    width: 100%;
+    height: 360px;
+    margin-bottom: 10px;
+  }
+
+  .user_details {
+    margin-left: 0;
+    display: flex;
+  }
+
+  .view_user .blank_btn{
+    position: absolute;
+    right: 15px;
+  }
 }
