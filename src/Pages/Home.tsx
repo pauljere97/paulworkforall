@@ -16,14 +16,14 @@ function Home() {
   const {fetchUsers, toggleLoading, setPage} = bindActionCreators(actionCreators, dispatch)
 
   const observer: any = useRef()
-  const lastUserNode = useCallback((node: any) => {
+  const lastUserNode = useCallback((node: any) => { // will fetch next page of content if 
     if (state.loading) return
     if (observer.current) observer.current.disconnect()
     observer.current = new IntersectionObserver((entries: any) => {
       if (entries[0].isIntersecting && !state.loading && state.totalUsers > state.users.length) {
         toggleLoading(true)
         let payload = `q=${state.search_query}&page=${state.page}`
-        let config = fetch_users(payload)
+        let config = fetch_users(payload, null)
         setPage((state.page + 1))
         axios(config).then(function (response) {
           let data = response.data
@@ -39,7 +39,7 @@ function Home() {
 
     if (node) observer.current.observe(node)
 
-  }, [state.loading, state.totalUsers, fetchUsers, toggleLoading, setPage, state.page, state.search_query, state.users])
+  }, [state, fetchUsers, toggleLoading, setPage])
 
 
   return (
@@ -48,9 +48,9 @@ function Home() {
       <div className="list_pad">
         {state.users.map((element:User, index: number) => {
           if (state.users.length === index + 1) {
-            return <div ref={lastUserNode} key={Math.random()}><UserCard data={element} /></div>
+            return <div ref={lastUserNode} key={index}><UserCard data={element} /></div>
           } else {
-            return <UserCard data={element} key={Math.random()} />
+            return <UserCard data={element} key={index} />
           }
         })}
         {

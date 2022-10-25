@@ -10,23 +10,28 @@ import { actionCreators } from '../state';
 import { useSelector } from 'react-redux';
 import { RootState } from '../state/reducers';
 
-function MainHeader() {
-  const dispatch = useDispatch()
-  const {fetchUsers, toggleLoading, setPage, setQuery, setTotal} = bindActionCreators(actionCreators, dispatch)
-  const state = useSelector((state:RootState) => state.appReducer)
+const CancelToken = axios.CancelToken;
+let cancel:any;
 
+const MainHeader = () => {
+  const dispatch = useDispatch()
+  const {fetchUsers, toggleLoading, setPage, setQuery, setTotal} = bindActionCreators(actionCreators, dispatch) // fetch redux actions
+  const state = useSelector((state:RootState) => state.appReducer)
   const [search_text, set_search] = useState(state.search_query)
-  const key_press = (e:any) => {
-    if(e.key === 'Enter') change_text()
-  }
-  const change_text = () => {
-    if(search_text.length < 3) return
-    let payload = `q=${search_text}&page=1`
-    let config = fetch_users(payload)
+
+  const handleSearchChange = (value:string) => {
+    set_search(value)
+    if(value.length < 3) return
+    if (cancel !== undefined) cancel(); // cancels previous unfinished axios requests
+    let cancelToken:any = new CancelToken((c) => cancel = c ) // stes axios cancel token
+
+    let payload = `q=${value}&page=1`
+    let config = fetch_users(payload, cancelToken)
     toggleLoading(true)
-    fetchUsers([])
-    setQuery(search_text)
-    setPage(1)
+    fetchUsers([]) // removes aall user from state
+    setQuery(value) // set query string in state for global access
+    setPage(1) // sets list page back to 1
+
     axios(config).then(function (response) {
       let data = response.data
       setTotal(data['total_count'])
@@ -37,7 +42,7 @@ function MainHeader() {
         console.log(error);
         toggleLoading(false)
     });
-  }
+  };
   
   return (
     <div className="header">
@@ -47,13 +52,13 @@ function MainHeader() {
           type="search" 
           placeholder='Search for GitHub users...' 
           value={search_text} 
-          onChange={(e)=>set_search(e.target.value)}
-          onKeyDown={key_press}
+          onChange={(e)=>handleSearchChange(e.target.value)}
         />
         <Link to='favorites'>
           {
-        
-        state.favorites.length ? <AiFillStar size={25} color={'#F2C94C'}/> : <AiOutlineStar size={25} className='top_bar_icons'/>
+              state.favorites.length ? 
+              <AiFillStar size={25} color={'#F2C94C'}/> : 
+              <AiOutlineStar size={25} className='top_bar_icons'/>
           }
         </Link>
       </div>
