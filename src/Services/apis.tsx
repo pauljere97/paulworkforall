@@ -7,7 +7,7 @@ export const fetch_users = (data:any, cancelToken:any) => {
         cancelToken:cancelToken,
         headers: { 
             'Content-Type': 'application/json',
-            'Authorization': 'Token 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'
+            // 'Authorization': 'Token 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'
         },
     };
 }
