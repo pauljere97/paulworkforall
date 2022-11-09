@@ -12,7 +12,7 @@ import { RootState } from '../state/reducers';
 
 const CancelToken = axios.CancelToken;
 let cancel:any;
-
+let set_timeout:any;
 const MainHeader = () => {
   const dispatch = useDispatch()
   const {fetchUsers, toggleLoading, setPage, setQuery, setTotal} = bindActionCreators(actionCreators, dispatch) // fetch redux actions
@@ -21,27 +21,32 @@ const MainHeader = () => {
 
   const handleSearchChange = (value:string) => {
     set_search(value)
-    if(value.length < 3) return
-    if (cancel !== undefined) cancel(); // cancels previous unfinished axios requests
-    let cancelToken:any = new CancelToken((c) => cancel = c ) // stes axios cancel token
-
-    let payload = `q=${value}&page=1`
-    let config = fetch_users(payload, cancelToken)
-    toggleLoading(true)
-    fetchUsers([]) // removes aall user from state
-    setQuery(value) // set query string in state for global access
-    setPage(1) // sets list page back to 1
-
-    axios(config).then(function (response) {
-      let data = response.data
-      setTotal(data['total_count'])
-      fetchUsers(data['items'])
-      toggleLoading(false)
-    })
-    .catch(function (error) {
-        console.log(error);
+    // set_timeout.clearTimeout()
+    clearTimeout(set_timeout)
+    set_timeout = setTimeout(()=>{
+      if(value.length < 3) return
+      if (cancel !== undefined) cancel(); // cancels previous unfinished axios requests
+      let cancelToken:any = new CancelToken((c) => cancel = c ) // stes axios cancel token
+  
+      let payload = `q=${value}&page=1`
+      let config = fetch_users(payload, cancelToken)
+      toggleLoading(true)
+      fetchUsers([]) // removes aall user from state
+      setQuery(value) // set query string in state for global access
+      setPage(1) // sets list page back to 1
+  
+      axios(config).then(function (response) {
+        let data = response.data
+        setTotal(data['total_count'])
+        fetchUsers(data['items'])
         toggleLoading(false)
-    });
+      })
+      .catch(function (error) {
+          console.log(error);
+          toggleLoading(false)
+      });
+    },400)
+    
   };
   
   return (

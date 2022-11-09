@@ -38,7 +38,7 @@ function UserCard({data}:any) {
 
   return (
     <div className="user_card">
-      <img onClick={view_user} className='user_profile_pic' src={avatar_url} alt={login} />
+      <img onClick={view_user} loading='lazy' className='user_profile_pic' src={avatar_url} alt={login} />
       <div className='card_main' onClick={view_user}>
         <p className='card_main_name'>@{login}</p>
         <p className='card_main_desc'>Enim cillum occaecat minim mollit cupidatat veniam laborum et officia anim.</p>

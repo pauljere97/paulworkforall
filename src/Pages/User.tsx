@@ -31,20 +31,28 @@ function User() {
     const state = useSelector((state:RootState) => state.appReducer)
     const is_favoriite = IsFavorite(username)
 
+    const fetch_user_data = async () => {
+        try{
+            toggleLoading(true)
+            let config = fetch_user(username)
+            axios(config).then(function (response) {
+                let data = response.data
+                set_user(data)
+                toggleLoading(false)
+            })
+            .catch(function (error) {
+                navigate(`/`)
+                console.log(error);
+                toggleLoading(false)
+            });
+        }catch(err){
+            console.log(err)
+        }
+    } 
+
     useEffect(() => {
-        toggleLoading(true)
-        let config = fetch_user(username)
-        axios(config).then(function (response) {
-            let data = response.data
-            set_user(data)
-            toggleLoading(false)
-        })
-        .catch(function (error) {
-            navigate(`/`)
-            console.log(error);
-            toggleLoading(false)
-        });
-    }, [username, navigate])
+        fetch_user_data()
+    }, [])
 
     const add_to_favorites = () => {
         if (is_favoriite) {
